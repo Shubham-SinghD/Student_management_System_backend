@@ -1,10 +1,11 @@
-package com.jsp.StudentManagementStstem.Dto;
+package com.jsp.StudentManagementStstem.Dto.response;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jsp.StudentManagementStstem.Dto.StudentData;
 
 import lombok.Data;
 @Component

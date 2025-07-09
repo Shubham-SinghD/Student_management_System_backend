@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.jsp.StudentManagementStstem.Dto.ResponseWrapper;
-import com.jsp.StudentManagementStstem.Dto.ResponseWrapper2;
-import com.jsp.StudentManagementStstem.Dto.Responseresult;
+import com.jsp.StudentManagementStstem.Dto.response.ResponseWrapper2;
+import com.jsp.StudentManagementStstem.Dto.response.Responseresult;
 import com.jsp.StudentManagementStstem.entity.LoginData;
 import com.jsp.StudentManagementStstem.login.dto.LoginHandler;
 import com.jsp.StudentManagementStstem.service.StudentService;
@@ -53,6 +53,11 @@ public class StudentController {
 	public ResponseEntity<Map<String, String>> deleteStudent(@RequestParam Long studentRollno){
 		studentService.deleteData(studentRollno);
 	return new  ResponseEntity<Map<String, String>>(Map.of("Status","Student Delete"),HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/rollno")
+	public ResponseWrapper getDataStudent(@RequestParam Long studentRollno) {
+		return studentService.getDataByRollNo(studentRollno);
 	}
 	
 	@PostMapping("/register")

@@ -1,8 +1,10 @@
-package com.jsp.StudentManagementStstem.Dto;
+package com.jsp.StudentManagementStstem.Dto.response;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import com.jsp.StudentManagementStstem.Dto.Response;
 
 import lombok.Data;
 @Component

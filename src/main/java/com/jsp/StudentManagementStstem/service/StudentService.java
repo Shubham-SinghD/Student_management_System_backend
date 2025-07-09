@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.jsp.StudentManagementStstem.Dto.Response;
-import com.jsp.StudentManagementStstem.Dto.Response2;
 import com.jsp.StudentManagementStstem.Dto.ResponseWrapper;
-import com.jsp.StudentManagementStstem.Dto.ResponseWrapper2;
-import com.jsp.StudentManagementStstem.Dto.Responseresult;
 import com.jsp.StudentManagementStstem.Dto.Session;
 import com.jsp.StudentManagementStstem.Dto.StudentData;
 import com.jsp.StudentManagementStstem.Dto.TextData;
-import com.jsp.StudentManagementStstem.Dto.TextData2;
+import com.jsp.StudentManagementStstem.Dto.response.Response2;
+import com.jsp.StudentManagementStstem.Dto.response.ResponseWrapper2;
+import com.jsp.StudentManagementStstem.Dto.response.Responseresult;
+import com.jsp.StudentManagementStstem.Dto.response.TextData2;
 import com.jsp.StudentManagementStstem.entity.LoginData;
 import com.jsp.StudentManagementStstem.entity.Student;
 import com.jsp.StudentManagementStstem.exception.DuplicateStudent;
@@ -83,7 +83,7 @@ public class StudentService {
 	}
 	// Getting All Details
 	public Responseresult getAllDetails() {
-	    List<Student> allStudents = studentrepo.findAll();
+	    List<Student> allStudents = studentrepo.findAllStudent();
 	    List<Response> responses = new ArrayList<>();
 	    for (Student student : allStudents) {
 	    	TextData textData = new TextData();
@@ -133,6 +133,34 @@ public class StudentService {
 		Student student = byId.get();
 		studentrepo.delete(student);
 	}
+	
+	
+	//Find By Roll no
+	public ResponseWrapper getDataByRollNo(Long studentRollno) {
+		Optional<Student> byId = studentrepo.findById(studentRollno);
+		if(byId.isEmpty()) {
+			throw new StudentNotFound("Student Not Found");
+		}
+		Student student = byId.get();
+		txtData.setSection(student.getSection()); 
+//	    List<StudentData> studentDataList = new ArrayList<>();
+	        StudentData studentData = new StudentData();
+	        studentData.setRollno(student.getRollno());
+	        studentData.setName(student.getName());
+	        studentData.setAddress(student.getAddress());
+//	        studentDataList.add(studentData);
+	    txtData.setData(studentData);
+//	    Response2 response2 = new Response2();
+	    response.setSession(session);
+	    response.setTxtData(txtData);
+	    rw.setResponse(response);
+	    return rw;
+		
+	}
+	
+	
+
+	
 
 	// Registration  Data
 	public void register(LoginData loginUser) {

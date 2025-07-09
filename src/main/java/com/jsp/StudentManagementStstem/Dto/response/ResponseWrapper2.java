@@ -1,4 +1,4 @@
-package com.jsp.StudentManagementStstem.Dto;
+package com.jsp.StudentManagementStstem.Dto.response;
 
 
 import org.springframework.stereotype.Component;
